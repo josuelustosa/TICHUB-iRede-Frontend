@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Product } from './model/product.model'
+import ProductCard from './components/ProductCard.vue'
 
 export default {
   data() {
@@ -7,12 +8,20 @@ export default {
       cart: {
         total: 0,
       },
-      product: new Product(
-        'Camisa Casa Seleção Brasileira',
-        'Camisa 1 oficial da Seleção Brasileira',
-        750,
-        0.05,
-      ),
+      products: [
+        new Product(
+          'Camisa Casa Seleção Brasileira',
+          'Camisa 1 oficial da Seleção Brasileira',
+          750,
+          0.05,
+        ),
+        new Product(
+          'Camisa Fora Seleção Brasileira',
+          'Camisa 2 oficial da Seleção Brasileira',
+          650,
+          0.02,
+        ),
+      ],
     }
   },
   methods: {
@@ -23,28 +32,17 @@ export default {
       this.cart.total -= 1
     },
   },
+  components: { ProductCard },
 }
 </script>
 
 <template>
   <main>
+    <ProductCard :product="products[1]" />
+
     <article>
       <h1>Carrinho</h1>
       <p>Total de itens: {{ cart.total }}</p>
-
-      <button @click="addItem()">Adicionar</button>
-      <button @click="decrementItem()">Diminuir</button>
-    </article>
-
-    <article>
-      <h1>{{ product.title }}</h1>
-      <p>{{ product.description }}</p>
-      <p>Valor original: R$ {{ product.price.toFixed(2).replace('.', ',') }}</p>
-      <p>
-        Valor com desconto ({{ product.discount }}%): R$
-        {{ product.price - product.price * product.discount }}
-      </p>
-      <p>Total de itens: {{ cart.total + 1 }}</p>
 
       <button @click="addItem()">Adicionar</button>
       <button @click="decrementItem()">Diminuir</button>
