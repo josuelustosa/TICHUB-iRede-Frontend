@@ -81,11 +81,11 @@ export default defineComponent({
 <template>
   <main class="app-container">
     <header class="header">
-      <h1>E-Commerce</h1>
-      <p class="subtitle">Bem-vindo ao nosso catálogo de produtos</p>
+      <h1>E-Commerce do Atleta 💪</h1>
+      <p class="subtitle">O lugar certo para quem busca alta performance!</p>
     </header>
 
-    <hr>
+    <hr />
 
     <div class="main-content">
       <section class="products-section">
