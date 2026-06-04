@@ -1,48 +1,65 @@
-# TICHUB003-e-commerce-II-vue
+# TIC Hub Programação Fullstack: Módulo Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Aqui você irá encontrar as atividades que desenvolvi durante o **Módulo Front-end** do programa [TIC Hub 12: Programação Fullstack](https://tic-hub.irede.org.br/) (2026_1).
 
-## Recommended IDE Setup
+## 🎓 Conheça o Programa
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+A Residência em TIC 12 é um programa de capacitação profissional e tecnológica executado pela Universidade Estadual do Ceará (UECE), coordenado pela Softex, com parceria do Instituto iRede (iRede) e do Instituto Federal do Ceará (IFCE), e incentivo do Ministério da Ciência, Tecnologia e Inovação (MCTI).
 
-## Recommended Browser Setup
+> O programa oferece 7 trilhas tecnológicas, com destaque para a formação em Programação FullStack, que atraiu 508 candidatos para apenas 100 vagas iniciais.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## 📂 Organização das Atividades
 
-## Type Support for `.vue` Imports in TS
+| Atividade                                                | Branch         |
+| -------------------------------------------------------- | -------------- |
+| Atividade 2: VueJS - E-commerce com Vue.js & Options API | `atv-2/vue-js` |
+| -                                                        | -              |
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## 💻 Sobre o Projeto
 
-## Customize configuration
+- Objetivo do Módulo: Desenvolver o frontend de um e-commerce.
+- Tecnologias Utilizadas: Vite, Vue 3 (PrimeVue, Vue Router, Pinia e Vuelidate), TypeScript e Tailwind CSS 4.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## ⚙️ Configuração do Projeto
 
-## Project Setup
+1. Clone o repositório ou a Brach que desejar:
+
+```sh
+git clone https://github.com/josuelustosa/TICHUB-iRede-Frontend.git
+cd TICHUB-iRede-Frontend
+```
+
+2. Instale as dependências
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+3. Execute o projeto em ambiente de desenvolvimento:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+4. Acesse a atividade no navegador:
+
+```sh
+http://localhost:5173
+```
+
+### Comandos úteis
+
+- Gerar build de produção:
 
 ```sh
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+- Visualizar build localmente:
 
 ```sh
-npm run lint
+npm run preview
 ```
+
+## 📃 Certificado de Conclusão
+Status do Programa: Em andamento.
