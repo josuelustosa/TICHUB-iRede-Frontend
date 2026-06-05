@@ -79,18 +79,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <main class="app-container">
-    <header class="header">
-      <h1>E-Commerce do Atleta 💪</h1>
-      <p class="subtitle">O lugar certo para quem busca alta performance!</p>
+  <div className="font-mono bg-neutral-200 dark:bg-neutral-900">
+    <header className="bg-neutral-100 dark:bg-neutral-950 px-4 py-8 text-center">
+      <h1 className="text-3xl font-extrabold text-teal-500">E-Commerce do Atleta 💪</h1>
+      <p className="text-base italic text-neutral-600 dark:text-neutral-300">
+        O lugar certo para quem busca alta performance!
+      </p>
     </header>
 
-    <hr />
-
-    <div class="main-content">
-      <section class="products-section">
-        <h2>Produtos Disponíveis</h2>
-        <div class="products-grid">
+    <main className="container mx-auto p-12">
+      <section>
+        <h2 className="text-2xl font-bold mb-6">Catálogo de Produtos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <ProductCard
             v-for="product in products"
             :key="product.id"
@@ -100,41 +100,34 @@ export default defineComponent({
         </div>
       </section>
 
-      <aside class="cart-summary">
+      <aside className="mt-12">
         <h2>Resumo do Carrinho</h2>
-        <div class="summary-box">
-          <div class="summary-item">
-            <span class="label">Total de Itens: </span>
-            <span class="value">{{ totalItems }}</span>
+        <div>
+          <div>
+            <span>Total de Itens: </span>
+            <span>{{ totalItems }}</span>
           </div>
-          <div class="summary-item">
-            <span class="label">Preço Final: </span>
-            <span class="value price">R$ {{ finalPrice.toFixed(2) }}</span>
+          <div>
+            <span>Preço Final: </span>
+            <span>R$ {{ finalPrice.toFixed(2) }}</span>
           </div>
         </div>
 
-        <div v-if="cart.cartItem.length > 0" class="cart-items">
+        <div v-if="cart.cartItem.length > 0">
           <h3>Itens no Carrinho</h3>
           <ul>
-            <li v-for="item in cart.cartItem" :key="item.product.id" class="cart-item">
-              <div class="item-info">
-                <span class="item-name">{{ item.product.name }}</span>
-                <span class="item-qty"> x{{ item.quantity }}</span>
+            <li v-for="item in cart.cartItem" :key="item.product.id">
+              <div>
+                <span>{{ item.product.name }}</span>
+                <span> x{{ item.quantity }}</span>
               </div>
-              <div class="item-actions">
-                <button
-                  @click="removeFromCart(item.product.id)"
-                  class="btn-remove"
-                  title="Remover uma unidade"
-                >
+              <div>
+                <button @click="removeFromCart(item.product.id)" title="Remover uma unidade">
                   ➖
                 </button>
-                <span class="item-price"
-                  >R$ {{ (item.product.price * item.quantity).toFixed(2) }}</span
-                >
+                <span>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</span>
                 <button
                   @click="removeItemFromCart(item.product.id)"
-                  class="btn-delete"
                   title="Remover item completamente"
                 >
                   ❌
@@ -143,12 +136,12 @@ export default defineComponent({
             </li>
           </ul>
         </div>
-        <div v-else class="empty-cart">
+        <div v-else>
           <p>Seu carrinho está vazio</p>
         </div>
       </aside>
-    </div>
-  </main>
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
