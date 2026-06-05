@@ -2,7 +2,12 @@
 import { defineComponent, PropType } from 'vue'
 import type { Product } from '@/models/product.model'
 
+import pButton from 'primevue/button'
+
 export default defineComponent({
+  components: {
+    pButton,
+  },
   props: {
     product: {
       type: Object as PropType<Product>,
@@ -25,7 +30,7 @@ export default defineComponent({
       <span class="category">{{ product.category.title }}</span>
       <span class="price"> R$ {{ product.price.toFixed(2) }}</span>
     </div>
-    <button @click="handleAddToCart" class="add-btn">Adicionar ao Carrinho</button>
+    <pButton @click="handleAddToCart" label="Adicionar ao Carrinho" />
   </div>
 </template>
 

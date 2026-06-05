@@ -1,1 +1,5 @@
-/*  */
+/*
+  Importando Tailwind CSS globalmente na v4.
+  Não é mais obrigatório ter o arquivo "tailwind.config.ts", somente para customizações avançadas.
+*/
+@import 'tailwindcss';
