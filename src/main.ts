@@ -7,6 +7,7 @@ import PrimeVue from 'primevue/config'
 // Componentes PrimeVue (importando apenas os que serão usados)
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import DataView from 'primevue/dataview'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -44,5 +45,6 @@ app.use(PrimeVue, {
 
 app.component('pButton', Button)
 app.component('pCard', Card)
+app.component('pDataView', DataView)
 
 app.mount('#app')

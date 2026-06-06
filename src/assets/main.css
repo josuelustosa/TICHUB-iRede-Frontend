@@ -3,3 +3,10 @@
   Não é mais obrigatório ter o arquivo "tailwind.config.ts", somente para customizações avançadas.
 */
 @import 'tailwindcss';
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}

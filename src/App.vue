@@ -1,6 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ProductCard from '@/components/ProductCard.vue'
+import CartSummary from '@/components/CartSummary.vue'
+
 import { Product } from '@/models/product.model'
 import { Category } from '@/models/category.model'
 import { Cart } from '@/models/cart.model'
@@ -8,6 +10,7 @@ import { Cart } from '@/models/cart.model'
 export default defineComponent({
   components: {
     ProductCard,
+    CartSummary,
   },
   data() {
     return {
@@ -87,9 +90,9 @@ export default defineComponent({
       </p>
     </header>
 
-    <main className="container mx-auto p-12">
+    <main className="container mx-auto p-6 md:p-12">
       <section>
-        <h2 className="text-2xl font-bold mb-6">Catálogo de Produtos</h2>
+        <h2>Catálogo de Produtos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <ProductCard
             v-for="product in products"
@@ -100,46 +103,14 @@ export default defineComponent({
         </div>
       </section>
 
-      <aside className="mt-12">
-        <h2>Resumo do Carrinho</h2>
-        <div>
-          <div>
-            <span>Total de Itens: </span>
-            <span>{{ totalItems }}</span>
-          </div>
-          <div>
-            <span>Preço Final: </span>
-            <span>R$ {{ finalPrice.toFixed(2) }}</span>
-          </div>
-        </div>
-
-        <div v-if="cart.cartItem.length > 0">
-          <h3>Itens no Carrinho</h3>
-          <ul>
-            <li v-for="item in cart.cartItem" :key="item.product.id">
-              <div>
-                <span>{{ item.product.name }}</span>
-                <span> x{{ item.quantity }}</span>
-              </div>
-              <div>
-                <button @click="removeFromCart(item.product.id)" title="Remover uma unidade">
-                  ➖
-                </button>
-                <span>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</span>
-                <button
-                  @click="removeItemFromCart(item.product.id)"
-                  title="Remover item completamente"
-                >
-                  ❌
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div v-else>
-          <p>Seu carrinho está vazio</p>
-        </div>
-      </aside>
+      <CartSummary
+        :cart-items="cart.cartItem"
+        :total-items="totalItems"
+        :final-price="finalPrice"
+        @increment="addToCart"
+        @decrement="removeFromCart"
+        @remove="removeItemFromCart"
+      />
     </main>
   </div>
 </template>
