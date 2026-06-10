@@ -4,6 +4,9 @@
 */
 @import 'tailwindcss';
 
+/* Criando uma classe dark manualmente para trabalhar com theme de PrimeVue */
+@custom-variant dark (&:where(.dark, .dark *));
+
 h2 {
   font-size: 1.5rem;
   line-height: 1.5rem;

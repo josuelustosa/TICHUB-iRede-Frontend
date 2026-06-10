@@ -4,12 +4,16 @@ import Aura from '@primeuix/themes/aura'
 import { definePreset } from '@primeuix/themes'
 import PrimeVue from 'primevue/config'
 
+// Ícones do Primevue
+import 'primeicons/primeicons.css'
+
 // Componentes PrimeVue (importando apenas os que serão usados)
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import DataView from 'primevue/dataview'
 import ConfirmDialog from 'primevue/confirmdialog'
 import ConfirmationService from 'primevue/confirmationservice'
+import ToggleSwitch from 'primevue/toggleswitch'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -42,6 +46,9 @@ app.use(router)
 app.use(PrimeVue, {
   theme: {
     preset: MyPreset,
+    options: {
+      darkModeSelector: '.dark',
+    },
   },
 })
 
@@ -50,5 +57,6 @@ app.component('pCard', Card)
 app.component('pDataView', DataView)
 app.component('pConfirmDialog', ConfirmDialog)
 app.use(ConfirmationService)
+app.component('pToggleSwitch', ToggleSwitch)
 
 app.mount('#app')
