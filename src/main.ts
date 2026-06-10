@@ -8,6 +8,8 @@ import PrimeVue from 'primevue/config'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import DataView from 'primevue/dataview'
+import ConfirmDialog from 'primevue/confirmdialog'
+import ConfirmationService from 'primevue/confirmationservice'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -46,5 +48,7 @@ app.use(PrimeVue, {
 app.component('pButton', Button)
 app.component('pCard', Card)
 app.component('pDataView', DataView)
+app.component('pConfirmDialog', ConfirmDialog)
+app.use(ConfirmationService)
 
 app.mount('#app')

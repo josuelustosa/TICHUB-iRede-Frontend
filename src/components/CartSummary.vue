@@ -4,6 +4,8 @@ import { defineComponent, PropType } from 'vue'
 import pCard from 'primevue/card'
 import pDataView from 'primevue/dataview'
 import pButton from 'primevue/button'
+import pConfirmDialog from 'primevue/confirmdialog'
+import { useConfirm } from 'primevue/useconfirm'
 
 import type { CartItem } from '@/models/cart.model'
 
@@ -12,6 +14,7 @@ export default defineComponent({
     pCard,
     pDataView,
     pButton,
+    pConfirmDialog,
   },
 
   props: {
@@ -30,12 +33,44 @@ export default defineComponent({
   },
 
   emits: ['increment', 'decrement', 'remove'],
+
+  setup(props, { emit }) {
+    const confirm = useConfirm()
+
+    const confirmRemove = (productId: number) => {
+      confirm.require({
+        message: `Deseja remover o produto do carrinho?`,
+        header: 'Confirmação',
+        acceptProps: {
+          label: 'Remover',
+          severity: 'danger',
+          size: 'small',
+        },
+        rejectProps: {
+          label: 'Cancelar',
+          severity: 'secondary',
+          outlined: true,
+          size: 'small',
+        },
+
+        accept: () => {
+          emit('remove', productId)
+        },
+      })
+    }
+
+    return {
+      confirmRemove,
+    }
+  },
 })
 </script>
 
 <template>
   <div className="my-12 mx-auto">
     <h2>Resumo do Carrinho</h2>
+
+    <pConfirmDialog />
 
     <template v-if="cartItems.length > 0">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -110,11 +145,11 @@ export default defineComponent({
                       />
 
                       <pButton
-                        label="Remover Todos"
+                        label="Remover Produto"
                         variant="outlined"
                         severity="danger"
                         size="small"
-                        @click="$emit('remove', item.product.id)"
+                        @click="confirmRemove(item.product.id)"
                       />
                     </div>
                     <small v-if="item.quantity >= 10" className="text-amber-500 font-medium">
