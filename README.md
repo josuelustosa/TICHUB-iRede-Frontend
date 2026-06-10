@@ -13,7 +13,8 @@ A Residência em TIC 12 é um programa de capacitação profissional e tecnológ
 | Atividade                                                | Branch         |
 | -------------------------------------------------------- | -------------- |
 | Atividade 2: VueJS - E-commerce com Vue.js & Options API | `atv-2/vue-js` |
-| -                                                        | -              |
+| Atividade 3: PrimeVue e Tailwind CSS | `atv-3/primevue-e-tailwind` |
+| - | - |
 
 ## 💻 Sobre o Projeto
 

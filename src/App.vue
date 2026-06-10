@@ -1,6 +1,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ProductCard from '@/components/ProductCard.vue'
+import CartSummary from '@/components/CartSummary.vue'
+import pToggleSwitch from 'primevue/toggleswitch'
+
 import { Product } from '@/models/product.model'
 import { Category } from '@/models/category.model'
 import { Cart } from '@/models/cart.model'
@@ -8,9 +11,12 @@ import { Cart } from '@/models/cart.model'
 export default defineComponent({
   components: {
     ProductCard,
+    CartSummary,
+    pToggleSwitch,
   },
   data() {
     return {
+      checked: false,
       products: [
         new Product(
           1,
@@ -64,6 +70,13 @@ export default defineComponent({
       return this.cart.getFinalPrice()
     },
   },
+  mounted() {
+    const savedTheme = localStorage.getItem('theme')
+
+    this.checked = savedTheme === 'dark'
+
+    document.documentElement.classList.toggle('dark', this.checked)
+  },
   methods: {
     addToCart(product: Product) {
       this.cart.addItem(product, 1)
@@ -74,23 +87,39 @@ export default defineComponent({
     removeItemFromCart(productId: number) {
       this.cart.removeItemCompletely(productId)
     },
+    toggleDarkMode() {
+      document.documentElement.classList.toggle('dark', this.checked)
+
+      localStorage.setItem('theme', this.checked ? 'dark' : 'light')
+    },
   },
 })
 </script>
 
 <template>
-  <main class="app-container">
-    <header class="header">
-      <h1>E-Commerce do Atleta 💪</h1>
-      <p class="subtitle">O lugar certo para quem busca alta performance!</p>
+  <div className="font-mono bg-neutral-200 dark:bg-neutral-900">
+    <header className="bg-neutral-100 dark:bg-neutral-950 px-4 py-8 text-center">
+      <h1 className="text-3xl font-extrabold text-teal-500">E-Commerce do Atleta 💪</h1>
+      <p className="text-base italic text-neutral-600 dark:text-neutral-300">
+        O lugar certo para quem busca alta performance!
+      </p>
+
+      <!-- Botão de Alterar Tema com PrimeVue usando classes do TailwindCSS -->
+      <pToggleSwitch
+        v-model="checked"
+        :pt="{ root: { class: 'scale-125 my-2' } }"
+        @change="toggleDarkMode"
+      >
+        <template #handle="{ checked }">
+          <i :class="['text-xs! pi', { 'pi-moon': checked, 'pi-sun': !checked }]" />
+        </template>
+      </pToggleSwitch>
     </header>
 
-    <hr />
-
-    <div class="main-content">
-      <section class="products-section">
-        <h2>Produtos Disponíveis</h2>
-        <div class="products-grid">
+    <main className="container mx-auto p-6 md:p-12">
+      <section>
+        <h2>Catálogo de Produtos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <ProductCard
             v-for="product in products"
             :key="product.id"
@@ -100,55 +129,16 @@ export default defineComponent({
         </div>
       </section>
 
-      <aside class="cart-summary">
-        <h2>Resumo do Carrinho</h2>
-        <div class="summary-box">
-          <div class="summary-item">
-            <span class="label">Total de Itens: </span>
-            <span class="value">{{ totalItems }}</span>
-          </div>
-          <div class="summary-item">
-            <span class="label">Preço Final: </span>
-            <span class="value price">R$ {{ finalPrice.toFixed(2) }}</span>
-          </div>
-        </div>
-
-        <div v-if="cart.cartItem.length > 0" class="cart-items">
-          <h3>Itens no Carrinho</h3>
-          <ul>
-            <li v-for="item in cart.cartItem" :key="item.product.id" class="cart-item">
-              <div class="item-info">
-                <span class="item-name">{{ item.product.name }}</span>
-                <span class="item-qty"> x{{ item.quantity }}</span>
-              </div>
-              <div class="item-actions">
-                <button
-                  @click="removeFromCart(item.product.id)"
-                  class="btn-remove"
-                  title="Remover uma unidade"
-                >
-                  ➖
-                </button>
-                <span class="item-price"
-                  >R$ {{ (item.product.price * item.quantity).toFixed(2) }}</span
-                >
-                <button
-                  @click="removeItemFromCart(item.product.id)"
-                  class="btn-delete"
-                  title="Remover item completamente"
-                >
-                  ❌
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div v-else class="empty-cart">
-          <p>Seu carrinho está vazio</p>
-        </div>
-      </aside>
-    </div>
-  </main>
+      <CartSummary
+        :cart-items="cart.cartItem"
+        :total-items="totalItems"
+        :final-price="finalPrice"
+        @increment="addToCart"
+        @decrement="removeFromCart"
+        @remove="removeItemFromCart"
+      />
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
