@@ -16,16 +16,18 @@ export class Cart {
         if (item.product.id === product.id) {
           return {
             product,
-            quantity: item.quantity + quantity,
+            quantity: Math.min(item.quantity + quantity, 10),
           }
         }
 
         return item
       })
+
+      return
     } else {
       this.cartItem.push({
         product,
-        quantity,
+        quantity: Math.min(quantity, 10),
       })
     }
   }

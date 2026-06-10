@@ -102,7 +102,12 @@ export default defineComponent({
                         {{ item.quantity }}
                       </span>
 
-                      <pButton label="+" size="small" @click="$emit('increment', item.product)" />
+                      <pButton
+                        label="+"
+                        size="small"
+                        :disabled="item.quantity >= 10"
+                        @click="$emit('increment', item.product)"
+                      />
 
                       <pButton
                         label="Remover Todos"
@@ -112,6 +117,9 @@ export default defineComponent({
                         @click="$emit('remove', item.product.id)"
                       />
                     </div>
+                    <small v-if="item.quantity >= 10" className="text-amber-500 font-medium">
+                      Limite máximo de 10 unidades atingido.
+                    </small>
                   </div>
 
                   <div className="text-left sm:text-right">
