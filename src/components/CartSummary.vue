@@ -49,15 +49,17 @@ export default defineComponent({
                 <span className="text-base text-neutral-800 dark:text-neutral-100">
                   Total de Itens:
                 </span>
-                <span className="text-base font-bold text-neutral-800 dark:text-neutral-100"
-                  >XX</span
-                >
+                <span className="text-base font-bold text-neutral-800 dark:text-neutral-100">{{
+                  totalItems
+                }}</span>
               </div>
               <div className="flex justify-between align-items-center gap-4">
                 <span className="text-base text-neutral-800 dark:text-neutral-100"
                   >Preço Final:</span
                 >
-                <span className="text-base font-bold text-teal-500">R$ XXX,XX</span>
+                <span className="text-base font-bold text-teal-500"
+                  >R$ {{ finalPrice.toFixed(2) }}</span
+                >
               </div>
             </template>
           </pCard>
